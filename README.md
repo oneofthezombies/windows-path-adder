@@ -1,5 +1,5 @@
 # windows-path-adder
 
-```sh
+```shell
 python -m windowspathadder "D:/my/directory/path"
 ```
