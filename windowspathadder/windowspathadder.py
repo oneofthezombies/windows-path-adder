@@ -16,7 +16,7 @@ def _print(message):
 
 
 def _command(*args, **kwargs):
-    _print(' '.join(args))
+    _print(' '.join(*args))
     return subprocess.run(*args, **kwargs)
 
 
@@ -38,7 +38,7 @@ class WindowsPathAdder:
         current_type = 'REG_SZ'
         current_path = None
 
-        completed_process = _command(['reg', 'query', 'HKCU\\Environment', '/v', 'PATH', '/f'], capture_output=True)
+        completed_process = _command(['reg', 'query', 'HKCU\\Environment', '/v', 'PATH'], capture_output=True)
         if completed_process.returncode == 0:
             stdout = _try_decode(completed_process.stdout)
             _print(stdout)
@@ -47,7 +47,7 @@ class WindowsPathAdder:
                 current_type = match.group('type')
                 current_path = match.group('value')
                 if current_path:
-                    current_path = current_path.strip()
+                    current_path = current_path.strip().replace('\r', '').replace('\n', '')
                     _print(f'current PATH: {current_path}')
                 else:
                     _print('environment variable PATH is empty.')
@@ -63,7 +63,7 @@ class WindowsPathAdder:
         _print(f'resolve new path. [{resolved_new_path}]')
 
         if current_path:
-            if resolved_new_path in current_path:
+            if resolved_new_path in current_path.split(';'):
                 _print(f'[{resolved_new_path}] exists in [{current_path}].')
                 _print(f'do not add to PATH.')
                 return
