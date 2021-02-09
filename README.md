@@ -2,13 +2,16 @@
 
 in windows
 ```shell
-# echo %PATH%
+echo %PATH%
 # C:\foo;D:\boo
+
 python -m windowspathadder "D:/new/path"
-# echo %PATH%
+# or python -m windowspathadder "D:\new\path"
+
+echo %PATH%
 # D:\new\path;C:\foo;D:\boo
 
-# the previous path is backed up.
-# echo %PATH_{timestamp}%
+# the previous path is backed up with timestamp.
+echo %PATH_{timestamp}%
 # C:\foo;D:\boo
 ```
