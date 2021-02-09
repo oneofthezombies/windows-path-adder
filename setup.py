@@ -3,7 +3,7 @@ import setuptools
 
 setuptools.setup(
     name="windows-path-adder",
-    version="1.0.2",
+    version="1.0.3",
     license='MIT',
     author="oneofthezombies",
     author_email="hunhoekim@gmail.com",
