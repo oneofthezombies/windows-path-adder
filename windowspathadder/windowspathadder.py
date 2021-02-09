@@ -16,7 +16,7 @@ def _print(message):
 
 
 def _command(*args, **kwargs):
-    _print(' '.join(*args))
+    _print(f'command: [{" ".join(list(*args))}]')
     return subprocess.run(*args, **kwargs)
 
 
@@ -48,7 +48,7 @@ class WindowsPathAdder:
                 current_path = match.group('value')
                 if current_path:
                     current_path = current_path.strip().replace('\r', '').replace('\n', '')
-                    _print(f'current PATH: {current_path}')
+                    _print(f'current PATH: [{current_path}]')
                 else:
                     _print('environment variable PATH is empty.')
 
